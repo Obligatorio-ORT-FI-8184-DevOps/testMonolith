@@ -1,0 +1,71 @@
+name: Monolith CI
+
+env:
+  COMMIT_MSG: ${{ github.event.head_commit.message }}
+  REPOSITORY_NAME: ${{ github.event.repository.name }}
+
+on:
+  push:
+    branches: [ "main" ]
+    
+concurrency: 
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build_and_upload_artifact:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+        
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+
+    # pruebas unitarias
+
+    # pruebas postman
+
+    # generar reporte y subirlo como artefacto
+    
+    # - uses: actions/upload-artifact@v3
+    #   with:
+    #     name: ${{ env.COMMIT_MSG }}
+    #     path: /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/monolith-build.jar
+    #     retention-days: 10
+
+    # enviar notificación con url del reporte
+
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar
+        token: ${{ secrets.GITHUB_TOKEN }}
+        bodyFile: "ReleaseInfo.md"
+        tag: ${{ env.COMMIT_MSG }}
+
+  # call-deploy-workflow:
+  #   uses: drahtul/msMonoCd/.github/workflows/cd.yml@main
+  #   with:
+  #     releaseTag: ${{ github.event.head_commit.message }}
+  #     repositoryName: ${{ github.event.repository.name }}    
+  #     # releaseTag: ${{ env.COMMIT_MSG }}
+  #     # repositoryName: ${{ env.REPOSITORY_NAME }}     
+
+
+######################## generar pull request en repo devops?? ########################
+
+    # - name: Find builded jar
+    #   run: echo $(find /home/runner/work/msMono/msMono/target/ -type f -name "*.jar")
+
+    # - name: Export de variable
+    #   id: imageTag
+    #   run: echo "::set-output name=version::$CONTAINER_IMAGE_VERSION"
