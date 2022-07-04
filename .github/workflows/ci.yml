@@ -52,13 +52,13 @@ jobs:
         bodyFile: "ReleaseInfo.md"
         tag: ${{ env.COMMIT_MSG }}
 
-  # call-deploy-workflow:
-  #   uses: drahtul/msMonoCd/.github/workflows/cd.yml@main
-  #   with:
-  #     releaseTag: ${{ github.event.head_commit.message }}
-  #     repositoryName: ${{ github.event.repository.name }}    
-  #     # releaseTag: ${{ env.COMMIT_MSG }}
-  #     # repositoryName: ${{ env.REPOSITORY_NAME }}     
+  call-deploy-workflow:
+    uses: Obligatorio-ORT-FI-8184-DevOps/DevOps_code/.github/workflows/cd.yml@main
+    with:
+      releaseTag: ${{ github.event.head_commit.message }}
+      repositoryName: ${{ github.event.repository.name }}    
+      # releaseTag: ${{ env.COMMIT_MSG }}
+      # repositoryName: ${{ env.REPOSITORY_NAME }}     
 
 
 ######################## generar pull request en repo devops?? ########################
