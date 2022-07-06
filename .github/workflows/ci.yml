@@ -55,7 +55,7 @@ jobs:
     - name: Checkout Target Repository
       uses: actions/checkout@v3
       with:
-        repository: drahtul/msMonoCd
+        repository: Obligatorio-ORT-FI-8184-DevOps/DevOps_code
         # ref: main
         token: ${{ secrets.GH_PAT }}
 
