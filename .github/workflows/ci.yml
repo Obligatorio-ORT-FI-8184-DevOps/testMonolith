@@ -70,7 +70,7 @@ jobs:
         # targetBranch: main
         # createPR: true
         # title: 'PR: ${{ env.COMMIT_MSG }}'
-        message: '${{ env.COMMIT_MSG }}'
+        message: ${{ env.REPOSITORY_NAME }}
         token: ${{ secrets.GH_PAT }}
 
   # call-deploy-workflow:
