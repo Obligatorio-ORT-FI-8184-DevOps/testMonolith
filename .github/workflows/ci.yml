@@ -57,7 +57,7 @@ jobs:
       with:
         repository: drahtul/msMonoCd
         # ref: main
-        token: ${{ secrets.GH_PAT }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Update Build version
       uses: fjogeleit/yaml-update-action@main
@@ -71,7 +71,7 @@ jobs:
         # createPR: true
         # title: 'PR: ${{ env.COMMIT_MSG }}'
         message: 'Build: ${{ env.COMMIT_MSG }}'
-        token: ${{ secrets.GH_PAT }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
   # call-deploy-workflow:
   #   uses: Obligatorio-ORT-FI-8184-DevOps/DevOps_code/.github/workflows/cd.yml@main
