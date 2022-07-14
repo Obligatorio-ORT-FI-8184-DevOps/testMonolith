@@ -64,7 +64,8 @@ jobs:
       with:
         artifacts: /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar
         token: ${{ secrets.GITHUB_TOKEN }}
-        bodyFile: "ReleaseInfo.md"
+        # bodyFile: "ReleaseInfo.md"
+        generateReleaseNotes: true
         tag: ${{ env.COMMIT_MSG }}
 
     - name: Repository Dispatch
