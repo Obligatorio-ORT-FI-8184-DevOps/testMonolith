@@ -1,9 +1,8 @@
-___
-## Release info:
-### Changes:
+### Release info:
+**Changes:**
 - New change!!!
 - Change n
-### Fixes:
+
+**Fixes:**
 - Fix 1
 - Fix n
-___
