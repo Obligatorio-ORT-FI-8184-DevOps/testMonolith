@@ -11,15 +11,24 @@ on:
     paths-ignore: 
       - .github/workflows/ci.yml
       - .github/workflows/cd.yml
-    
-concurrency: 
-  group: ${{ github.ref }}
-  cancel-in-progress: true
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+    paths-ignore: 
+      - .github/workflows/ci.yml
+      - .github/workflows/cd.yml
+
+#cancela job previo   
+# concurrency: 
+#   group: ${{ github.ref }}
+#   cancel-in-progress: true
 
 jobs:
   build_and_upload_artifact:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     
     steps:
     - name: Checkout code
@@ -48,22 +57,18 @@ jobs:
     #     retention-days: 10
 
     # enviar notificación con url del reporte
-
-    - uses: ncipollo/release-action@v1
+    
+    - name: new release
+      if: ${{ github.event_name == 'push' }}
+      uses: ncipollo/release-action@v1
       with:
         artifacts: /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar
         token: ${{ secrets.GITHUB_TOKEN }}
         bodyFile: "ReleaseInfo.md"
         tag: ${{ env.COMMIT_MSG }}
 
-    # - name: Checkout Target Repository
-    #   uses: actions/checkout@v3
-    #   with:
-    #     repository: Obligatorio-ORT-FI-8184-DevOps/DevOps_code
-    #     # ref: main
-    #     token: ${{ secrets.GH_PAT }}
-
     - name: Repository Dispatch
+      if: ${{ github.event_name == 'push' }}
       uses: peter-evans/repository-dispatch@v2
       with:
         token: ${{ secrets.GH_PAT }}
@@ -71,6 +76,14 @@ jobs:
         repository: Obligatorio-ORT-FI-8184-DevOps/DevOps_code
         event-type: ${{ env.COMMIT_MSG }}
         client-payload: '{"tag": "${{ env.COMMIT_MSG }}", "repo": "${{ env.REPOSITORY_NAME }}"}'
+
+    # - name: Checkout Target Repository
+    #   uses: actions/checkout@v3
+    #   with:
+    #     repository: Obligatorio-ORT-FI-8184-DevOps/DevOps_code
+          # fetch-depth: 0 # último commit
+    #     # ref: main
+    #     token: ${{ secrets.GH_PAT }}
 
     # - name: Update Build version
     #   uses: fjogeleit/yaml-update-action@main
