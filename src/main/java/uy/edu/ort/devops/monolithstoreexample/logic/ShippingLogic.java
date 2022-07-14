@@ -16,9 +16,9 @@ public class ShippingLogic {
 
     public ShippingLogic() {
         testShipping = new HashMap<>();
-        testShipping.put("a", new Shipping("Delivered", "a"));
-        testShipping.put("b", new Shipping("In transit", "b"));
-        testShipping.put("c", new Shipping("Preparing", "c"));
+        testShipping.put("a", new Shipping("Delivered!!", "a"));
+        testShipping.put("b", new Shipping("In transit!!", "b"));
+        testShipping.put("c", new Shipping("Preparing!!", "c"));
     }
 
     public void addShipping(String id) {
