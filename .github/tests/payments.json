@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "fb439199-2029-4b39-8857-47ce365dc6f1",
+		"name": "Monolith",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Payments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code & body format\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.ok;\r",
+							"    pm.response.to.be.json;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"All properties &  \", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.orderId).to.eql('someUUID');\r",
+							"    pm.expect(responseJson.success).to.be.a('boolean');\r",
+							"    pm.expect(responseJson.description).to.be.a('string');\r",
+							"    // pm.expect(responseJson.orderId).to.have.lengthOf(8);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Response time < 50ms\", () => {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(50);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/payments/someUUID",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"payments",
+						"someUUID"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
