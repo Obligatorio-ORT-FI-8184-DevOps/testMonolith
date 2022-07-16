@@ -52,8 +52,8 @@ jobs:
     #   run: docker run hello-world
 
     - name: Run jar file
-      run: java -jar /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/monolith-build.jar $APP_ARGS
-      
+      run: java -jar /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar $APP_ARGS
+
     # - uses: actions/setup-node@v3
     #   with:
     #     node-version: 16
