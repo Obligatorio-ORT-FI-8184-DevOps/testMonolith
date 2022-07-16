@@ -87,7 +87,7 @@ jobs:
     - name: Send notification
       if: always()
       run: |
-        echo https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/runs/{{ GITHUB_RUN_ID }}
+        echo https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/runs/${{ github.run_id }}
 
     - name: new release
       if: ${{ github.event_name == 'push' }}
