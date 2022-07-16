@@ -52,7 +52,7 @@ jobs:
     #   run: docker run hello-world
 
     - name: Run jar file
-      run: java -jar /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar &
+      run: java -jar /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar --server.port=8083 &
       # run: java -jar /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar $APP_ARGS &
 
     # - name: wget
@@ -79,7 +79,7 @@ jobs:
       with:
         # name: ${{ env.REPOSITORY_NAME }}-TestReport-$(date +'%Y-%m-%dT%H:%M:%S')
         # name: ${{ env.REPOSITORY_NAME }}-TestReport-${{ github.event.repository.pushed_at }}
-        name: ${{ env.REPOSITORY_NAME }}-TestReport-$NOW
+        name: ${{ env.REPOSITORY_NAME }}-TestReport-${{ NOW }}
         path: testResults/newmanRpt.html
         retention-days: 10
 
