@@ -47,6 +47,8 @@ jobs:
     # pruebas unitarias
 
     # pruebas postman
+    - name: Docker
+      run: docker run hello-world
 
     # generar reporte y subirlo como artefacto
     
