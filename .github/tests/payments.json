@@ -26,8 +26,8 @@
 							"    // pm.expect(responseJson.orderId).to.have.lengthOf(8);\r",
 							"})\r",
 							"\r",
-							"pm.test(\"Response time < 50ms\", () => {\r",
-							"  pm.expect(pm.response.responseTime).to.be.below(50);\r",
+							"pm.test(\"Response time < 100ms\", () => {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(100);\r",
 							"})"
 						],
 						"type": "text/javascript"
