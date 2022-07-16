@@ -73,9 +73,10 @@ jobs:
       run: |
         newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
     # newman run ./tests/pokemon-api-collection.json -e ./tests/pokemonapi-env.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
-    
+
     # TODO: generar reporte y subirlo como artefacto    
-    - name: TEST upload artifact
+    - name: Upload report artifact
+      if: always()
       uses: actions/upload-artifact@v3
       with:
         name: RunReports
@@ -84,25 +85,25 @@ jobs:
 
     # TODO: enviar notificación con url del reporte
     
-    # - name: new release
-    #   if: ${{ github.event_name == 'push' }}
-    #   uses: ncipollo/release-action@v1
-    #   with:
-    #     artifacts: /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar
-    #     token: ${{ secrets.GITHUB_TOKEN }}
-    #     bodyFile: "ReleaseInfo.md"
-    #     generateReleaseNotes: true
-    #     tag: ${{ env.COMMIT_MSG }}
+    - name: new release
+      if: ${{ github.event_name == 'push' }}
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar
+        token: ${{ secrets.GITHUB_TOKEN }}
+        bodyFile: "ReleaseInfo.md"
+        generateReleaseNotes: true
+        tag: ${{ env.COMMIT_MSG }}
 
-    # - name: Repository Dispatch
-    #   if: ${{ github.event_name == 'push' }}
-    #   uses: peter-evans/repository-dispatch@v2
-    #   with:
-    #     token: ${{ secrets.GH_PAT }}
-    #     # token: ${{ secrets.REPO_ACCESS_TOKEN }}
-    #     repository: Obligatorio-ORT-FI-8184-DevOps/DevOps_code
-    #     event-type: ${{ env.COMMIT_MSG }}
-    #     client-payload: '{"tag": "${{ env.COMMIT_MSG }}", "repo": "${{ env.REPOSITORY_NAME }}"}'
+    - name: Repository Dispatch
+      if: ${{ github.event_name == 'push' }}
+      uses: peter-evans/repository-dispatch@v2
+      with:
+        token: ${{ secrets.GH_PAT }}
+        # token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        repository: Obligatorio-ORT-FI-8184-DevOps/DevOps_code
+        event-type: ${{ env.COMMIT_MSG }}
+        client-payload: '{"tag": "${{ env.COMMIT_MSG }}", "repo": "${{ env.REPOSITORY_NAME }}"}'
 
 ##################### DESCARTES ####################################################################
 
