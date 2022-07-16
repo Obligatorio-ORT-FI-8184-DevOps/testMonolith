@@ -71,7 +71,8 @@ jobs:
           # Run the POSTMAN collection
     - name: Run POSTMAN collection
       run: |
-        newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
+        newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html 
+    #--reporter-htmlextra-darkTheme  > testResults/runreport1.html
     # newman run ./tests/pokemon-api-collection.json -e ./tests/pokemonapi-env.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
 
     # TODO: generar reporte y subirlo como artefacto    
