@@ -70,13 +70,9 @@ jobs:
       id: newman
       run: |
         mkdir -p testResults
-        echo "::set-output name=NOW::$(date +'%Y-%m-%dT%H:%M:%S')"
         newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResults/newmanRpt.html
 
-    # TODO: generar reporte y subirlo como artefacto 
-      if: always()  
-    - run: echo ${{ env.REPOSITORY_NAME }}-TestReport-${{ steps.newman.outputs.NOW }}
-
+    # TODO: generar reporte y subirlo como artefacto
     - name: Upload report artifact
       if: always()
       uses: actions/upload-artifact@v3
@@ -88,7 +84,11 @@ jobs:
         retention-days: 10
 
     # TODO: enviar notificación con url del reporte
-    
+    - name: Send notification
+      if: always()
+      run: |
+        echo https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/runs/{{ GITHUB_RUN_ID }}
+
     - name: new release
       if: ${{ github.event_name == 'push' }}
       uses: ncipollo/release-action@v1
