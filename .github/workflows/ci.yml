@@ -76,7 +76,7 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ env.REPOSITORY_NAME }-TestReport-$(date +'%Y-%m-%dT%H:%M:%S')        
+        name: "${{ env.REPOSITORY_NAME }-TestReport-$(date +'%Y-%m-%dT%H:%M:%S')"
         # name: '${{ env.REPOSITORY_NAME }_TestReport_${{ github.event.repository.pushed_at }}'
         path: testResults/newmanRpt.html
         retention-days: 10
