@@ -70,7 +70,7 @@ jobs:
       run: |
         mkdir -p testResults
         newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResults/newmanRpt.html
-        echo "now=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+        echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
 
     # TODO: generar reporte y subirlo como artefacto    
     - name: Upload report artifact
@@ -79,7 +79,7 @@ jobs:
       with:
         # name: ${{ env.REPOSITORY_NAME }}-TestReport-$(date +'%Y-%m-%dT%H:%M:%S')
         # name: ${{ env.REPOSITORY_NAME }}-TestReport-${{ github.event.repository.pushed_at }}
-        name: ${{ env.REPOSITORY_NAME }}-TestReport-${{ env.now }}
+        name: ${{ env.REPOSITORY_NAME }}-TestReport-${{ NOW }}
         path: testResults/newmanRpt.html
         retention-days: 10
 
