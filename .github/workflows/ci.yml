@@ -52,10 +52,11 @@ jobs:
     #   run: docker run hello-world
 
     - name: Run jar file
-      run: java -jar /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar $APP_ARGS &
+      run: java -jar /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar &
+      # run: java -jar /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar $APP_ARGS &
 
-    - name: wget
-      run: curl http://localhost:8080/products
+    # - name: wget
+    #   run: curl http://localhost:8080/products
 
     - uses: actions/setup-node@v3
       with:
@@ -68,20 +69,17 @@ jobs:
     - name: tests output directory
       run: mkdir -p testResults
 
-          # Run the POSTMAN collection
     - name: Run POSTMAN collection
       run: |
-        newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html 
-    #--reporter-htmlextra-darkTheme  > testResults/runreport1.html
-    # newman run ./tests/pokemon-api-collection.json -e ./tests/pokemonapi-env.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
+        newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResult/newmanRpt.html
 
     # TODO: generar reporte y subirlo como artefacto    
     - name: Upload report artifact
       if: always()
       uses: actions/upload-artifact@v3
       with:
-        name: RunReports
-        path: testResults
+        name: TestReport
+        path: testResults/newmanRpt.html
         retention-days: 10
 
     # TODO: enviar notificación con url del reporte
@@ -101,7 +99,6 @@ jobs:
       uses: peter-evans/repository-dispatch@v2
       with:
         token: ${{ secrets.GH_PAT }}
-        # token: ${{ secrets.REPO_ACCESS_TOKEN }}
         repository: Obligatorio-ORT-FI-8184-DevOps/DevOps_code
         event-type: ${{ env.COMMIT_MSG }}
         client-payload: '{"tag": "${{ env.COMMIT_MSG }}", "repo": "${{ env.REPOSITORY_NAME }}"}'
