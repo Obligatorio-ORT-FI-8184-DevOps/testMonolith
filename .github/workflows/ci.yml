@@ -70,7 +70,7 @@ jobs:
       id: newman
       run: |
         mkdir -p testResults
-        newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResults/newmanRpt.htmlV
+        newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResults/newmanRpt.html
         echo "::set-output name=now::$(date +'%Y-%m-%dT%H:%M:%S')"
 
     # TODO: generar reporte y subirlo como artefacto    
