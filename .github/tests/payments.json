@@ -38,11 +38,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost/payments/someUUID",
+					"raw": "http://localhost:8080/payments/someUUID",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"payments",
 						"someUUID"
