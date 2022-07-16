@@ -66,12 +66,10 @@ jobs:
         npm install -g newman
         npm install -g newman-reporter-htmlextra
 
-    - name: tests output directory
-      run: mkdir -p testResults
-
-    - name: Run POSTMAN collection
+    - name: Run postman collection & report
       run: |
-        newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResult/newmanRpt.html
+        mkdir -p testResults
+        newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResults/newmanRpt.html
 
     # TODO: generar reporte y subirlo como artefacto    
     - name: Upload report artifact
