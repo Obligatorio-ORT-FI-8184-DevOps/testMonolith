@@ -44,17 +44,13 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    # pruebas unitarias
-
     ####### PRUEBAS POSTMAN
 
-    # - name: TEST Docker
-    #   run: docker run hello-world
-
-    - name: Run jar file
+    - name: Run monolith jar file
       run: java -jar /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar --server.port=8083 &
       # run: java -jar /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar $APP_ARGS &
-
+    
+    # test ms
     # - name: wget
     #   run: curl http://localhost:8080/products
 
@@ -83,18 +79,17 @@ jobs:
         path: testResults/newmanRpt.html
         retention-days: 10
 
-    # TODO: enviar notificación con url del reporte
+    # Enviar notificación con url del reporte
     - name: Send notification
       if: always()
       run: |
         echo https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/runs/${{ github.run_id }}
 
-    - name: send telegram message on push
+    - name: Send telegram message on push
       if: always()
       uses: appleboy/telegram-action@master
       with:
-        # to: ${{ secrets.TELEGRAM_TO }}
-        to: '@Obligatorio_DevOps_bot'
+        to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           ${{ github.actor }} created commit:
@@ -103,6 +98,8 @@ jobs:
           Repository: ${{ github.repository }}
           
           See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+
+          ARTIFACT-URL: https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/runs/${{ github.run_id }}
 
     - name: new release
       if: ${{ github.event_name == 'push' }}
