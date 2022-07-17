@@ -89,6 +89,21 @@ jobs:
       run: |
         echo https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/runs/${{ github.run_id }}
 
+    - name: send telegram message on push
+      if: always()
+      uses: appleboy/telegram-action@master
+      with:
+        # to: ${{ secrets.TELEGRAM_TO }}
+        to: '@CamiHelgue'
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          ${{ github.actor }} created commit:
+          Commit message: ${{ github.event.commits[0].message }}
+          
+          Repository: ${{ github.repository }}
+          
+          See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+
     - name: new release
       if: ${{ github.event_name == 'push' }}
       uses: ncipollo/release-action@v1
