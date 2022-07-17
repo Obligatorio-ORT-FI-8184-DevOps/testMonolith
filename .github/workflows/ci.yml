@@ -85,22 +85,22 @@ jobs:
       run: |
         echo https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/runs/${{ github.run_id }}
 
-    - name: Send telegram message on push
+    - name: Send telegram message
       if: always()
       uses: appleboy/telegram-action@master
       with:
-        # to: ${{ secrets.TELEGRAM_TO }}
-        to: -600691062
+        to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
+        document: testResults/newmanRpt.html
         message: |
-          ${{ github.actor }} created commit:
-          Commit message: ${{ github.event.commits[0].message }}
-          
-          Repository: ${{ github.repository }}
-          
-          See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-
-          ARTIFACT-URL: https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/runs/${{ github.run_id }}
+          Ci trigger user:
+          ${{ github.actor }}
+          Release version:
+          ${{ env.COMMIT_MSG }}
+          Changes:
+          https://github.com/${{ env.REPOSITORY_NAME }}/commit/${{github.sha}}
+          Run log and test report:
+          https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/actions/runs/${{ github.run_id }}
 
     - name: new release
       if: ${{ github.event_name == 'push' }}
