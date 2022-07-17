@@ -93,12 +93,10 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         document: testResults/newmanRpt.html
         message: |
-          Ci trigger user:
-          ${{ github.actor }}
-          Release version:
-          ${{ env.COMMIT_MSG }}
+          Ci trigger user: ${{ github.actor }}
+          Release version: ${{ env.COMMIT_MSG }}
           Changes:
-          https://github.com/${{ env.REPOSITORY_NAME }}/commit/${{github.sha}}
+          https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/commit/${{github.sha}}
           Run log and test report:
           https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/actions/runs/${{ github.run_id }}
 
