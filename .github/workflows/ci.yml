@@ -94,7 +94,7 @@ jobs:
       uses: appleboy/telegram-action@master
       with:
         # to: ${{ secrets.TELEGRAM_TO }}
-        to: '@CamiHelgue'
+        to: '@Obligatorio_DevOps_bot'
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           ${{ github.actor }} created commit:
