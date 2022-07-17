@@ -66,20 +66,16 @@ jobs:
       id: newman
       run: |
         mkdir -p testResults
-        newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResults/newmanRpt.html
+        newman run .github/tests/payments.json -r htmlextra --reporter-htmlextra-export testResults/testReport.html
 
-    # TODO: generar reporte y subirlo como artefacto
     - name: Upload report artifact
       if: always()
       uses: actions/upload-artifact@v3
       with:
-        # name: ${{ env.REPOSITORY_NAME }}-TestReport-$(date +'%Y-%m-%dT%H:%M:%S')
-        # name: ${{ env.REPOSITORY_NAME }}-TestReport-${{ github.event.repository.pushed_at }}
         name: ${{ env.REPOSITORY_NAME }}-TestReport
-        path: testResults/newmanRpt.html
+        path: testResults/testReport.html
         retention-days: 10
 
-    # Enviar notificación con url del reporte
     - name: Send notification
       if: always()
       run: |
@@ -91,7 +87,7 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        document: testResults/newmanRpt.html
+        document: testResults/testReport.html
         message: |
           Ci trigger user: ${{ github.actor }}
           Release version: ${{ env.COMMIT_MSG }}
@@ -100,7 +96,7 @@ jobs:
           Run log and test report:
           https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/actions/runs/${{ github.run_id }}
 
-    - name: new release
+    - name: Publish new release
       if: ${{ github.event_name == 'push' }}
       uses: ncipollo/release-action@v1
       with:
