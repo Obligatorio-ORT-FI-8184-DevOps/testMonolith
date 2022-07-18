@@ -50,12 +50,12 @@ jobs:
 
     # - name: Sonar Cloud 2
     #   run: mvn sonar:sonar \
-    #       -Dsonar.projectKey=Obligatorio-ORT-FI-8184-DevOps__${{ env.REPOSITORY_NAME }} \
+    #       -Dsonar.projectKey=Obligatorio-ORT-FI-8184-DevOps_${{ env.REPOSITORY_NAME }} \
     #       -Dsonar.organization=obligatorio-ort-fi-8184-devop \
     #       -Dsonar.host.url=https://sonarcloud.io \
     #       -Dsonar.login=${{ secrets.SONAR_TOKEN }}
     - name: Sonar Cloud
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Obligatorio-ORT-FI-8184-DevOps_testMonolith
+      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Obligatorio-ORT-FI-8184-DevOps_${{ env.REPOSITORY_NAME }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
       # run: mvn verify sonar:sonar \
       #       -Dsonar.organization=obligatorio-ort-fi-8184-devops \
