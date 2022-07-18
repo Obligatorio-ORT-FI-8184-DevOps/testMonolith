@@ -74,12 +74,7 @@ jobs:
       with:
         name: ${{ env.REPOSITORY_NAME }}-TestReport
         path: testResults/testReport.html
-        retention-days: 10
-
-    - name: Send notification
-      if: always()
-      run: |
-        echo https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/runs/${{ github.run_id }}
+        retention-days: 5
 
     - name: Send telegram message
       if: always()
