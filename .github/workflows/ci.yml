@@ -20,7 +20,7 @@ on:
       - .github/workflows/ci.yml
       - .github/workflows/cd.yml
 
-#cancela job previo   
+# Cancela job previo   
 # concurrency: 
 #   group: ${{ github.ref }}
 #   cancel-in-progress: true
@@ -45,6 +45,9 @@ jobs:
       run: mvn -B package --file pom.xml
 
     ####### PRUEBAS POSTMAN
+
+    # - name: Find downloaded jar
+    #   run: echo $(find /home/runner/work/msMono/msMono/target/ -type f -name "*.jar")
 
     - name: Run monolith jar file
       run: java -jar /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar --server.port=8083 &
@@ -84,7 +87,7 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         document: testResults/testReport.html
         message: |
-          << CI pipeline - Test completed>>
+          << CI pipeline - Test completed >>
           Trigger user: ${{ github.actor }}
           Commit message: ${{ env.COMMIT_MSG }}
           Changes:
@@ -111,7 +114,7 @@ jobs:
         event-type: ${{ env.COMMIT_MSG }}
         client-payload: '{"tag": "${{ env.COMMIT_MSG }}", "repo": "${{ env.REPOSITORY_NAME }}"}'
 
-##################### DESCARTES ####################################################################
+    ################## DESCARTES #####################
 
     # - name: Checkout Target Repository
     #   uses: actions/checkout@v3
@@ -143,11 +146,6 @@ jobs:
       # releaseTag: ${{ env.COMMIT_MSG }}
       # repositoryName: ${{ env.REPOSITORY_NAME }}     
 
-
-######################## generar pull request en repo devops?? ########################
-
-    # - name: Find builded jar
-    #   run: echo $(find /home/runner/work/msMono/msMono/target/ -type f -name "*.jar")
 
     # - name: Export de variable
     #   id: imageTag
