@@ -84,7 +84,7 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         document: testResults/testReport.html
         message: |
-          << CI pipeline >>
+          << CI pipeline - Test completed>>
           Trigger user: ${{ github.actor }}
           Commit message: ${{ env.COMMIT_MSG }}
           Changes:
