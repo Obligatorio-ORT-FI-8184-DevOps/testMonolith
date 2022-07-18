@@ -49,10 +49,16 @@ jobs:
         cache: maven
 
     - name: Sonar Cloud
-      run: mvn verify sonar:sonar \
-            -Dsonar.organization=obligatorio-ort-fi-8184-devops \
-            -Dsonar.projectKey=Obligatorio-ORT-FI-8184-DevOps_${{ env.REPOSITORY_NAME }} \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      run: mvn sonar:sonar \
+          -Dsonar.projectKey=Obligatorio-ORT-FI-8184-DevOps__${{ env.REPOSITORY_NAME }} \
+          -Dsonar.organization=obligatorio-ort-fi-8184-devop \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }
+          
+      # run: mvn verify sonar:sonar \
+      #       -Dsonar.organization=obligatorio-ort-fi-8184-devops \
+      #       -Dsonar.projectKey=Obligatorio-ORT-FI-8184-DevOps_${{ env.REPOSITORY_NAME }} \
+      #       -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
             # -Dsonar.host.url=https://sonarcloud.io \
     # - name: Analyze with SonarCloud
