@@ -50,7 +50,7 @@ jobs:
 
     - name: Sonar Cloud
       run: mvn verify sonar:sonar \
-            -Dsonar.host.url=https://sonarcloud.io \
+            "-Dsonar.host.url=https://sonarcloud.io" \
             -Dsonar.organization=obligatorio-ort-fi-8184-devops \
             -Dsonar.projectKey=Obligatorio-ORT-FI-8184-DevOps_${{ env.REPOSITORY_NAME }} \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
