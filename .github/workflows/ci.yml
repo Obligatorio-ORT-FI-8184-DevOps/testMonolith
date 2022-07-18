@@ -49,9 +49,7 @@ jobs:
         cache: maven
 
     - name: Build with Maven - Code quality & security
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.projectKey=Obligatorio-ORT-FI-8184-DevOps_${{ env.REPOSITORY_NAME }} \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Obligatorio-ORT-FI-8184-DevOps_${{ env.REPOSITORY_NAME }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
     ####### PRUEBAS POSTMAN
 
