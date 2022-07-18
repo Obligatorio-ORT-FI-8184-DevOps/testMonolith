@@ -89,8 +89,9 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         document: testResults/testReport.html
         message: |
-          Ci trigger user: ${{ github.actor }}
-          Release version: ${{ env.COMMIT_MSG }}
+          << CI pipeline >>
+          Trigger user: ${{ github.actor }}
+          Commit message: ${{ env.COMMIT_MSG }}
           Changes:
           https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/commit/${{github.sha}}
           Run log and test report:
