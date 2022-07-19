@@ -81,49 +81,53 @@ jobs:
         path: testResults/testReport.html
         retention-days: 5
 
+
     - name: Error msg
       if: steps.newman.outcome == 'failure'
       run: |
         export NE=with error
         echo "::set-env name=NE::$NE"
 
-
-    - name: Send telegram message
+    - name: echooooo  
       if: always()
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        document: testResults/testReport.html
-        message: |
-          << CI pipeline - Monolith Tests completed ${{ env.NE }}>>
-          Trigger user: ${{ github.actor }}
-          Commit message: ${{ env.COMMIT_MSG }}
-          Changes:
-          https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/commit/${{github.sha}}
-          Code quality & security:
-          https://sonarcloud.io/summary/overall?id=Obligatorio-ORT-FI-8184-DevOps_${{ env.REPOSITORY_NAME }}
-          Run log and test report:
-          https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/actions/runs/${{ github.run_id }}
+      run: echo << CI pipeline - Monolith Tests completed ${{ env.NE }}>>
 
-    - name: Publish new release
-      if: ${{ github.event_name == 'push' }}
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar
-        token: ${{ secrets.GITHUB_TOKEN }}
-        bodyFile: "ReleaseInfo.md"
-        generateReleaseNotes: true
-        tag: ${{ env.COMMIT_MSG }}
+    # - name: Send telegram message
+    #   if: always()
+    #   uses: appleboy/telegram-action@master
+    #   with:
+    #     to: ${{ secrets.TELEGRAM_TO }}
+    #     token: ${{ secrets.TELEGRAM_TOKEN }}
+    #     document: testResults/testReport.html
+    #     message: |
+    #       << CI pipeline - Monolith Tests completed ${{ env.NE }}>>
+    #       Trigger user: ${{ github.actor }}
+    #       Commit message: ${{ env.COMMIT_MSG }}
+    #       Changes:
+    #       https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/commit/${{github.sha}}
+    #       Code quality & security:
+    #       https://sonarcloud.io/summary/overall?id=Obligatorio-ORT-FI-8184-DevOps_${{ env.REPOSITORY_NAME }}
+    #       Run log and test report:
+    #       https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/actions/runs/${{ github.run_id }}
 
-    - name: Repository Dispatch
-      if: ${{ github.event_name == 'push' }}
-      uses: peter-evans/repository-dispatch@v2
-      with:
-        token: ${{ secrets.GH_PAT }}
-        repository: Obligatorio-ORT-FI-8184-DevOps/DevOps_code
-        event-type: ${{ env.COMMIT_MSG }}
-        client-payload: '{"tag": "${{ env.COMMIT_MSG }}", "repo": "${{ env.REPOSITORY_NAME }}"}'
+    # - name: Publish new release
+    #   if: ${{ github.event_name == 'push' }}
+    #   uses: ncipollo/release-action@v1
+    #   with:
+    #     artifacts: /home/runner/work/${{ env.REPOSITORY_NAME }}/${{ env.REPOSITORY_NAME }}/target/ms-build.jar
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     bodyFile: "ReleaseInfo.md"
+    #     generateReleaseNotes: true
+    #     tag: ${{ env.COMMIT_MSG }}
+
+    # - name: Repository Dispatch
+    #   if: ${{ github.event_name == 'push' }}
+    #   uses: peter-evans/repository-dispatch@v2
+    #   with:
+    #     token: ${{ secrets.GH_PAT }}
+    #     repository: Obligatorio-ORT-FI-8184-DevOps/DevOps_code
+    #     event-type: ${{ env.COMMIT_MSG }}
+    #     client-payload: '{"tag": "${{ env.COMMIT_MSG }}", "repo": "${{ env.REPOSITORY_NAME }}"}'
 
     ################## DESCARTES #####################
 
