@@ -84,9 +84,8 @@ jobs:
 
     - name: Error msg
       if: failure()
-      run: |
-        export NE=with error
-        echo "::set-env name=NE::$NE"
+      env:
+        NE: with error
 
     - name: echooooo  
       if: always()
