@@ -1,0 +1,1 @@
+[![Monolith CI](https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/workflows/ci.yml)
