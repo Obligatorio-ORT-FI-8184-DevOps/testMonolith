@@ -84,8 +84,7 @@ jobs:
 
     - name: Error msg
       if: failure()
-      env:
-        NE: with error
+      run: echo "NE= with error" >> $GITHUB_ENV
 
     - name: echooooo  
       if: always()
