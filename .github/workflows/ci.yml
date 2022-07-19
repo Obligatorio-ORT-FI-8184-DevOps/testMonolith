@@ -90,7 +90,8 @@ jobs:
 
     - name: echooooo  
       if: always()
-      run: echo << CI pipeline - Monolith Tests completed ${{ env.NE }}>>
+      run: echo ${{ env.NE }}
+      # run: echo << CI pipeline - Monolith Tests completed ${{ env.NE }}>>
 
     # - name: Send telegram message
     #   if: always()
