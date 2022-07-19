@@ -75,7 +75,7 @@ jobs:
 
     - name: Error msg
       if: failure()
-      run: echo "NE=with error" >> $GITHUB_ENV
+      run: echo "NE=with failure " >> $GITHUB_ENV
 
     - name: Upload report artifact
       if: always()
@@ -84,10 +84,6 @@ jobs:
         name: ${{ env.REPOSITORY_NAME }}-TestReport
         path: testResults/testReport.html
         retention-days: 5
-
-    # - name: echooooo  
-    #   if: always()
-    #   run: echo ${{ env.NE }}
 
     - name: Send telegram message
       if: always()
