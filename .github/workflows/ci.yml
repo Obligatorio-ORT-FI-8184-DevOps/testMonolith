@@ -73,41 +73,39 @@ jobs:
         mkdir -p testResults
         newman run .github/tests/newman.json -r htmlextra --reporter-htmlextra-export testResults/testReport.html
 
-    # - name: Upload report artifact
-    #   if: always()
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: ${{ env.REPOSITORY_NAME }}-TestReport
-    #     path: testResults/testReport.html
-    #     retention-days: 5
-
-
     - name: Error msg
       if: failure()
-      run: echo "NE= with error" >> $GITHUB_ENV
+      run: echo "NE=with error" >> $GITHUB_ENV
 
-    - name: echooooo  
+    - name: Upload report artifact
       if: always()
-      run: echo ${{ env.NE }}
-      # run: echo << CI pipeline - Monolith Tests completed ${{ env.NE }}>>
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ env.REPOSITORY_NAME }}-TestReport
+        path: testResults/testReport.html
+        retention-days: 5
 
-    # - name: Send telegram message
+    # - name: echooooo  
     #   if: always()
-    #   uses: appleboy/telegram-action@master
-    #   with:
-    #     to: ${{ secrets.TELEGRAM_TO }}
-    #     token: ${{ secrets.TELEGRAM_TOKEN }}
-    #     document: testResults/testReport.html
-    #     message: |
-    #       << CI pipeline - Monolith Tests completed ${{ env.NE }}>>
-    #       Trigger user: ${{ github.actor }}
-    #       Commit message: ${{ env.COMMIT_MSG }}
-    #       Changes:
-    #       https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/commit/${{github.sha}}
-    #       Code quality & security:
-    #       https://sonarcloud.io/summary/overall?id=Obligatorio-ORT-FI-8184-DevOps_${{ env.REPOSITORY_NAME }}
-    #       Run log and test report:
-    #       https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/actions/runs/${{ github.run_id }}
+    #   run: echo ${{ env.NE }}
+
+    - name: Send telegram message
+      if: always()
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        document: testResults/testReport.html
+        message: |
+          << CI pipeline - Monolith Tests completed ${{ env.NE }}>>
+          Trigger user: ${{ github.actor }}
+          Commit message: ${{ env.COMMIT_MSG }}
+          Changes:
+          https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/commit/${{github.sha}}
+          Code quality & security:
+          https://sonarcloud.io/summary/overall?id=Obligatorio-ORT-FI-8184-DevOps_${{ env.REPOSITORY_NAME }}
+          Run log and test report:
+          https://github.com/Obligatorio-ORT-FI-8184-DevOps/${{ env.REPOSITORY_NAME }}/actions/runs/${{ github.run_id }}
 
     # - name: Publish new release
     #   if: ${{ github.event_name == 'push' }}
