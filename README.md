@@ -1,5 +1,1 @@
-## CI/CD Status Badges
-<sup>Orders</sup> [![](https://github.com/Obligatorio-ORT-FI-8184-DevOps/msOrders/actions/workflows/ci.yml/badge.svg)](https://github.com/Obligatorio-ORT-FI-8184-DevOps/msOrders/actions/workflows/ci.yml) <sup>Payments</sup> [![](https://github.com/Obligatorio-ORT-FI-8184-DevOps/msPayments/actions/workflows/ci.yml/badge.svg)](https://github.com/Obligatorio-ORT-FI-8184-DevOps/msPayments/actions/workflows/ci.yml) <sup>Products</sup> [![](https://github.com/Obligatorio-ORT-FI-8184-DevOps/msProducts/actions/workflows/ci.yml/badge.svg)](https://github.com/Obligatorio-ORT-FI-8184-DevOps/msProducts/actions/workflows/ci.yml) <sup>Shipping</sup> [![](https://github.com/Obligatorio-ORT-FI-8184-DevOps/msShipping/actions/workflows/ci.yml/badge.svg)](https://github.com/Obligatorio-ORT-FI-8184-DevOps/msShipping/actions/workflows/ci.yml) <sup>Last msCD</sup> [![](https://github.com/Obligatorio-ORT-FI-8184-DevOps/DevOps_code/actions/workflows/cd.yml/badge.svg)](https://github.com/Obligatorio-ORT-FI-8184-DevOps/DevOps_code/actions/workflows/cd.yml)
-___
-
-# Documento Obligatorio-ORT-FI-8184-DevOps
+<sup>Monolith</sup> [![](https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/workflows/ci.yml/badge.svg)](https://github.com/Obligatorio-ORT-FI-8184-DevOps/testMonolith/actions/workflows/ci.yml)
