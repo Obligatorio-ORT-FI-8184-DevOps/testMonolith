@@ -16,9 +16,9 @@ public class ProductsLogic {
 
     public ProductsLogic() {
         testProducts = new HashMap<>();
-        testProducts.put("123", new Product("123", "monolith-0.7.1", 10, "Esto es un producto"));
-        testProducts.put("321", new Product("321", "monolith-0.7.1", 10, "Esto es un producto"));
-        testProducts.put("111", new Product("111", "monolith-0.7.1", 10, "Esto es un producto"));
+        testProducts.put("123", new Product("123", "monolith-0.7.2", 10, "Esto es un producto"));
+        testProducts.put("321", new Product("321", "monolith-0.7.2", 10, "Esto es un producto"));
+        testProducts.put("111", new Product("111", "monolith-0.7.2", 10, "Esto es un producto"));
     }
 
     public Collection<Product> list() {
